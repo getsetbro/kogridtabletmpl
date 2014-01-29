@@ -1,44 +1,42 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Kogridtabletmpl by getsetbro</title>
+<!DOCTYPE html>
+<html lang="en">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Kogridtabletmpl</h1>
-        <p>Kogridtabletmpl</p>
+<head>
+    <meta charset="utf-8" />
+    <title>kogrid table tmpl</title>
+    <link rel="stylesheet" type="text/css" href="KoGrid.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
 
-        <p class="view"><a href="https://github.com/getsetbro/kogridtabletmpl">View the Project on GitHub <small>getsetbro/kogridtabletmpl</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/getsetbro/kogridtabletmpl/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/getsetbro/kogridtabletmpl/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/getsetbro/kogridtabletmpl">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>
-<a name="kogridtabletmpl" class="anchor" href="#kogridtabletmpl"><span class="octicon octicon-link"></span></a>Kogridtabletmpl</h3>
-
-<p>Kogridtabletmpl</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/getsetbro">getsetbro</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+<body>
+    <div class="gridStyle" data-bind="koGrid: {
+      data: myData,
+      enableColumnResize: true,
+      displaySelectionCheckbox: true,
+      multiSelect: true,
+      showColumnMenu: false,
+      showFilter: false,
+      showGroupPanel: false,
+      columnDefs: [ 
+        { field: 'a', displayName: '!', width: 22}, 
+        { field: 'b', headerClass: 'hdr-attachment', displayName: 'Attachment', width: 35}, 
+        { field: 'c', displayName: 'Subject'}, 
+        { field: 'd', displayName: 'Date' }, 
+        { field: 'e', displayName: 'Regarding' }, 
+        { field: 'f', displayName: 'Author' },
+        { field: 'g', displayName: 'gggggggggggggggggggggggg' },
+        { field: 'h', displayName: 'hhhh  h h h h h h h hh  hh ' },
+        { field: 'i', displayName: 'iii', cellTemplate: $('#m').html()  }
+      ]
+    }">
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+    <script id="m"><div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)"></div></script>
+<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src="knockout3.min.js"></script>
+    <script type="text/javascript" src="KoGrid.debug1.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+</body>
+
 </html>
