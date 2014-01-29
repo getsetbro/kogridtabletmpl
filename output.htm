@@ -1,0 +1,1053 @@
+<div class="grid-regular koGrid ng1388517118134" data-bind="koGrid: {
+					rowHeight: 28,
+					data: data.models,
+					useExternalFiltering : false,
+					useExternalSorting : false,
+					filterInfo : data.filterInfo,
+					sortInfo : data.sortInfo,
+					autogenerateColumns: false,
+					columnDefs: [ { field: 'dirtyFlag', displayName: '!', width: getSize('1Chars'), cellTemplate: 'DirtyFlagTemplate' },
+								{ field: 'FileName', headerClass: 'hdr-attachment', displayName: 'Attachment', width: 35,cellTemplate: 'MemoAttachmentURLTemplate'},
+								{ field: 'Subject', displayName: 'Subject', width: getSize('60Chars'),cellTemplate: 'MemoSubjectURLTemplate'},
+								{ field: 'CreatedOn', displayName: 'Date', width: getSize('10Chars') },
+								{ field: 'RecipientNames', displayName: 'Regarding', width: getSize('30Chars') },
+								{ field: 'Author.Name', displayName: 'Author', width: 'size.35Chars*' },                                                       
+							],
+					displaySelectionCheckbox : true,
+					displayRowIndex: false,
+					multiSelect: true,
+					headerRowHeight: 26,
+					enablePaging: true,
+					selectedItems: data.selectedItems,
+					pagingOptions: { pageSize: data.pageSize, pageSizes: [25, 50, 75], currentPage: data.currentPage, totalServerItems: data.totalItems }
+					}">
+    <div data-bind="css: {'ui-widget': jqueryUITheme, 'kgNoSelect' : disableTextSelection}" class="kgNoSelect">
+        <div class="kgTopPanel" data-bind="css: {'ui-widget-header':jqueryUITheme, 'ui-corner-top': jqueryUITheme}, style: $data.topPanelStyle" style="width: 896px; height: 26px;">
+            <div class="kgGroupPanel" data-bind="visible: $data.showGroupPanel, style: headerStyle" style="display: none; width: 796px; height: 26px;">
+                <div class="kgGroupPanelDescription" data-bind="visible: configGroups().length == 0">Drag a column header here and drop it to group by that column</div>
+                <ul data-bind="visible: configGroups().length &gt; 0, foreach: configGroups" class="kgGroupList" style="display: none;"></ul>
+            </div>
+            <div class="kgHeaderContainer" data-bind="style: headerStyle" style="width: 796px; height: 26px;">
+                <div class="kgHeaderScroller" data-bind="style: headerScrollerStyle, kgHeaderRow: $data" style="height: 26px;">
+                    <div data-bind="foreach: visibleColumns">
+                        <div data-bind="kgHeaderCell: $data, attr: { 'class': 'kgHeaderCell col' + $index() }" class="kgHeaderCell col0">
+                            <input class="kgSelectionHeader" type="checkbox" data-bind="visible: $grid.multiSelect, checked: $grid.allSelected">
+                        </div>
+                        <div data-bind="kgHeaderCell: $data, attr: { 'class': 'kgHeaderCell col' + $index() }" class="kgHeaderCell col1">
+                            <div data-bind="style: { cursor : sortable() ? 'pointer' : 'default' }, click: sort, css: {'kgSorted': !noSortVisible }, attr: {'class': 'kgHeaderSortColumn ' + headerClass()}" class="kgHeaderSortColumn undefined" draggable="true" style="cursor: pointer;">
+                                <div data-bind="attr: { 'class': 'colt' + $index() + ' kgHeaderText' }, html: displayName" class="colt1 kgHeaderText">!</div>
+                                <div class="kgSortButtonDown" data-bind="visible: showSortButtonDown" style="display: none;"></div>
+                                <div class="kgSortButtonUp" data-bind="visible: showSortButtonUp" style="display: none;"></div>
+                                <div data-bind="visible: resizable, click: gripClick, mouseEvents: { mouseDown: gripOnMouseDown }" class="kgHeaderGrip"></div>
+                            </div>
+                        </div>
+                        <div data-bind="kgHeaderCell: $data, attr: { 'class': 'kgHeaderCell col' + $index() }" class="kgHeaderCell col2">
+                            <div data-bind="style: { cursor : sortable() ? 'pointer' : 'default' }, click: sort, css: {'kgSorted': !noSortVisible }, attr: {'class': 'kgHeaderSortColumn ' + headerClass()}" class="kgHeaderSortColumn hdr-attachment" draggable="true" style="cursor: pointer;">
+                                <div data-bind="attr: { 'class': 'colt' + $index() + ' kgHeaderText' }, html: displayName" class="colt2 kgHeaderText">Attachment</div>
+                                <div class="kgSortButtonDown" data-bind="visible: showSortButtonDown" style="display: none;"></div>
+                                <div class="kgSortButtonUp" data-bind="visible: showSortButtonUp" style="display: none;"></div>
+                                <div data-bind="visible: resizable, click: gripClick, mouseEvents: { mouseDown: gripOnMouseDown }" class="kgHeaderGrip"></div>
+                            </div>
+                        </div>
+                        <div data-bind="kgHeaderCell: $data, attr: { 'class': 'kgHeaderCell col' + $index() }" class="kgHeaderCell col3">
+                            <div data-bind="style: { cursor : sortable() ? 'pointer' : 'default' }, click: sort, css: {'kgSorted': !noSortVisible }, attr: {'class': 'kgHeaderSortColumn ' + headerClass()}" class="kgHeaderSortColumn undefined" draggable="true" style="cursor: pointer;">
+                                <div data-bind="attr: { 'class': 'colt' + $index() + ' kgHeaderText' }, html: displayName" class="colt3 kgHeaderText">Subject</div>
+                                <div class="kgSortButtonDown" data-bind="visible: showSortButtonDown" style="display: none;"></div>
+                                <div class="kgSortButtonUp" data-bind="visible: showSortButtonUp" style="display: none;"></div>
+                                <div data-bind="visible: resizable, click: gripClick, mouseEvents: { mouseDown: gripOnMouseDown }" class="kgHeaderGrip"></div>
+                            </div>
+                        </div>
+                        <div data-bind="kgHeaderCell: $data, attr: { 'class': 'kgHeaderCell col' + $index() }" class="kgHeaderCell col4">
+                            <div data-bind="style: { cursor : sortable() ? 'pointer' : 'default' }, click: sort, css: {'kgSorted': !noSortVisible }, attr: {'class': 'kgHeaderSortColumn ' + headerClass()}" class="kgHeaderSortColumn undefined" draggable="true" style="cursor: pointer;">
+                                <div data-bind="attr: { 'class': 'colt' + $index() + ' kgHeaderText' }, html: displayName" class="colt4 kgHeaderText">Date</div>
+                                <div class="kgSortButtonDown" data-bind="visible: showSortButtonDown" style="display: none;"></div>
+                                <div class="kgSortButtonUp" data-bind="visible: showSortButtonUp" style="display: none;"></div>
+                                <div data-bind="visible: resizable, click: gripClick, mouseEvents: { mouseDown: gripOnMouseDown }" class="kgHeaderGrip"></div>
+                            </div>
+                        </div>
+                        <div data-bind="kgHeaderCell: $data, attr: { 'class': 'kgHeaderCell col' + $index() }" class="kgHeaderCell col5">
+                            <div data-bind="style: { cursor : sortable() ? 'pointer' : 'default' }, click: sort, css: {'kgSorted': !noSortVisible }, attr: {'class': 'kgHeaderSortColumn ' + headerClass()}" class="kgHeaderSortColumn undefined" draggable="true" style="cursor: pointer;">
+                                <div data-bind="attr: { 'class': 'colt' + $index() + ' kgHeaderText' }, html: displayName" class="colt5 kgHeaderText">Regarding</div>
+                                <div class="kgSortButtonDown" data-bind="visible: showSortButtonDown" style="display: none;"></div>
+                                <div class="kgSortButtonUp" data-bind="visible: showSortButtonUp" style="display: none;"></div>
+                                <div data-bind="visible: resizable, click: gripClick, mouseEvents: { mouseDown: gripOnMouseDown }" class="kgHeaderGrip"></div>
+                            </div>
+                        </div>
+                        <div data-bind="kgHeaderCell: $data, attr: { 'class': 'kgHeaderCell col' + $index() }" class="kgHeaderCell col6">
+                            <div data-bind="style: { cursor : sortable() ? 'pointer' : 'default' }, click: sort, css: {'kgSorted': !noSortVisible }, attr: {'class': 'kgHeaderSortColumn ' + headerClass()}" class="kgHeaderSortColumn undefined" draggable="true" style="cursor: pointer;">
+                                <div data-bind="attr: { 'class': 'colt' + $index() + ' kgHeaderText' }, html: displayName" class="colt6 kgHeaderText">Author</div>
+                                <div class="kgSortButtonDown" data-bind="visible: showSortButtonDown" style="display: none;"></div>
+                                <div class="kgSortButtonUp" data-bind="visible: showSortButtonUp" style="display: none;"></div>
+                                <div data-bind="visible: resizable, click: gripClick, mouseEvents: { mouseDown: gripOnMouseDown }" class="kgHeaderGrip"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kgHeaderButton" data-bind="visible: ($data.showColumnMenu || $data.showFilter), click: toggleShowMenu" style="display: none;">
+                <div class="kgHeaderButtonArrow"></div>
+            </div>
+            <div data-bind="visible: showMenu" class="kgColMenu" style="display: none;">
+                <div data-bind="visible: showFilter" style="display: none;">
+                    <input placeholder="Seach Field:Value" type="text" data-bind="value: filterText, valueUpdate: 'afterkeydown'">
+                </div>
+                <div data-bind="visible: showColumnMenu" style="display: none;">
+                    <span class="kgMenuText">Choose Columns:</span>
+                    <ul class="kgColList" data-bind="foreach: nonAggColumns">
+                        <li class="kgColListItem">
+                            <label style="position: relative;">
+                                <input type="checkbox" class="kgColListCheckbox" data-bind="checked: visible">
+                                <span data-bind="text: displayName, click: toggleVisible">✔</span>
+                                <a title="Group By" data-bind="attr: {'class': groupedByClass }, visible: (field != '✔'), click: $parent.groupBy" class="kgGroupIcon" style="display: none;"></a>
+                                <span class="kgGroupingNumber" data-bind="visible: groupIndex() &gt; 0, text: groupIndex" style="display: none;">0</span>
+                            </label>
+                        </li>
+                        <li class="kgColListItem">
+                            <label style="position: relative;">
+                                <input type="checkbox" class="kgColListCheckbox" data-bind="checked: visible">
+                                <span data-bind="text: displayName, click: toggleVisible">!</span>
+                                <a title="Group By" data-bind="attr: {'class': groupedByClass }, visible: (field != '✔'), click: $parent.groupBy" class="kgGroupIcon"></a>
+                                <span class="kgGroupingNumber" data-bind="visible: groupIndex() &gt; 0, text: groupIndex" style="display: none;">0</span>
+                            </label>
+                        </li>
+                        <li class="kgColListItem">
+                            <label style="position: relative;">
+                                <input type="checkbox" class="kgColListCheckbox" data-bind="checked: visible">
+                                <span data-bind="text: displayName, click: toggleVisible">Attachment</span>
+                                <a title="Group By" data-bind="attr: {'class': groupedByClass }, visible: (field != '✔'), click: $parent.groupBy" class="kgGroupIcon"></a>
+                                <span class="kgGroupingNumber" data-bind="visible: groupIndex() &gt; 0, text: groupIndex" style="display: none;">0</span>
+                            </label>
+                        </li>
+                        <li class="kgColListItem">
+                            <label style="position: relative;">
+                                <input type="checkbox" class="kgColListCheckbox" data-bind="checked: visible">
+                                <span data-bind="text: displayName, click: toggleVisible">Subject</span>
+                                <a title="Group By" data-bind="attr: {'class': groupedByClass }, visible: (field != '✔'), click: $parent.groupBy" class="kgGroupIcon"></a>
+                                <span class="kgGroupingNumber" data-bind="visible: groupIndex() &gt; 0, text: groupIndex" style="display: none;">0</span>
+                            </label>
+                        </li>
+                        <li class="kgColListItem">
+                            <label style="position: relative;">
+                                <input type="checkbox" class="kgColListCheckbox" data-bind="checked: visible">
+                                <span data-bind="text: displayName, click: toggleVisible">Date</span>
+                                <a title="Group By" data-bind="attr: {'class': groupedByClass }, visible: (field != '✔'), click: $parent.groupBy" class="kgGroupIcon"></a>
+                                <span class="kgGroupingNumber" data-bind="visible: groupIndex() &gt; 0, text: groupIndex" style="display: none;">0</span>
+                            </label>
+                        </li>
+                        <li class="kgColListItem">
+                            <label style="position: relative;">
+                                <input type="checkbox" class="kgColListCheckbox" data-bind="checked: visible">
+                                <span data-bind="text: displayName, click: toggleVisible">Regarding</span>
+                                <a title="Group By" data-bind="attr: {'class': groupedByClass }, visible: (field != '✔'), click: $parent.groupBy" class="kgGroupIcon"></a>
+                                <span class="kgGroupingNumber" data-bind="visible: groupIndex() &gt; 0, text: groupIndex" style="display: none;">0</span>
+                            </label>
+                        </li>
+                        <li class="kgColListItem">
+                            <label style="position: relative;">
+                                <input type="checkbox" class="kgColListCheckbox" data-bind="checked: visible">
+                                <span data-bind="text: displayName, click: toggleVisible">Author</span>
+                                <a title="Group By" data-bind="attr: {'class': groupedByClass }, visible: (field != '✔'), click: $parent.groupBy" class="kgGroupIcon"></a>
+                                <span class="kgGroupingNumber" data-bind="visible: groupIndex() &gt; 0, text: groupIndex" style="display: none;">0</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kgViewport" data-bind="css: {'ui-widget-content': jqueryUITheme}, style: viewportStyle" tabindex="2" style="width: 896px; height: 217px;">
+            <div class="kgCanvas" data-bind="style: canvasStyle" style="height: 644px;">
+                <div data-bind="foreach: renderedRows" style="position: absolute;">
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 0px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Propety">Propety</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">12/17/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Marsden, Denise</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Kruger, Thania</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 28px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="test">test</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">12/06/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">JP Morgan Chase &amp; Company</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Basheer, Mohamed</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 56px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a href="../Annotation/GetImageById?id=08894f4d-3c4d-e311-b2d6-00505692010a&amp;imagetype=memo" data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" title="Chicago Cisco IP Phone User Guide.docx">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="test memo #1 RML - 111413">test memo #1 RML - 111413</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">11/18/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">AEW Capital Management, L.P.</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Licudine, Ryan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 84px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="test">test</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">11/06/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">JPS Real Estate Inc</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Basheer, Mohamed</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 112px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="test">test</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">11/05/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">JP Associates</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Basheer, Mohamed</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 140px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a href="../Annotation/GetImageById?id=73e3c41b-aa3d-e311-9d45-00505692010a&amp;imagetype=memo" data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" title="BillToContact.png">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Test Memo 2 [With Attachment]">Test Memo 2 [With Attachment]</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">10/25/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Morgan, Stanley, Smith, Barney LLC</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Patel, Sanjay</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 168px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Test Memo">Test Memo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">10/25/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Morgan, LLC</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Patel, Sanjay</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 196px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="BBVA Compass">BBVA Compass</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">08/13/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">BBVA Compass Bank</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Largay, Keith</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 224px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Quadrant Updated Loan Programs">Quadrant Updated Loan Programs</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">07/18/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Quadrant Real Estate Advisors LLC</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Board, Jimmy</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 252px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Updated Cap Costs from Chatham">Updated Cap Costs from Chatham</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">07/17/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">CMG Memos - Market Intelligence</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Board, Jimmy</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 280px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a href="../Annotation/GetImageById?id=121dc73b-2ed9-e211-b344-00505692015c&amp;imagetype=memo" data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" title="PNC Real Estate - Meeting Review 6 18 13.docx">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="PNC Real Estate - Meeting Review 6 18 13">PNC Real Estate - Meeting Review 6 18 13</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">07/11/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">PNC Real Estate</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Fish, Tom</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 308px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Morgan Stanley">Morgan Stanley</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">07/11/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Morgan Stanley</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Fish, Tom</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 336px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="PIMCO – Value-add Fund">PIMCO – Value-add Fund</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">07/10/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">PIMCO Commercial Mortgage Securities Trust</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Li, Shuoyu</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 364px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Almanac">Almanac</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">07/10/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Almanac Realty</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Li, Shuoyu</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 392px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Retail CMBS Quotes">Retail CMBS Quotes</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">06/24/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Morgan Stanley</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Largay, Keith</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 420px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a href="../Annotation/GetImageById?id=6d6af7b5-d8dc-e211-b2e7-00505692015c&amp;imagetype=memo" data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" title="GE Capital Real Estate - Loan Programs 6.20.13.docx">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="GE Capital Real Estate - Loan Programs 6.20.13">GE Capital Real Estate - Loan Programs 6.20.13</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">06/24/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">GE Capital Real Estate</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Hassenflu, Stephen</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 448px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Spreads">Spreads</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">06/21/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Jones Lang LaSalle, Inc.</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Fish, Tom</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 476px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a href="../Annotation/GetImageById?id=3cd45dc9-10d2-e211-aaa1-00505692015a&amp;imagetype=memo" data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" title="Servicing Agreements List.docx">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="Servicing Agreement Summary">Servicing Agreement Summary</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">06/18/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Aegon USA~ AIG~ Allianz of America, Inc.~ Bank of America~ Continental Casualty Company~ Freddie Mac~ Morgan Stanley~ Royal Bank of Scotland~ Wells Fargo &amp; Company</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Melody, Mike</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 504px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="test memo 060513">test memo 060513</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">06/05/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Rojo, Luke</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Licudine, Ryan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 532px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="lunch w/Luke Rojo">lunch w/Luke Rojo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">05/29/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Rojo, Luke</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Licudine, Ryan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 560px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="test memo - 052913 Prater">test memo - 052913 Prater</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">05/29/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Prater, Annette</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Licudine, Ryan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow even" style="top: 588px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" style="display: none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="123 test - 032513">123 test - 032513</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">03/25/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Rojo, Luke</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Licudine, Ryan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="style: { 'top': offsetTop, 'height': $parent.rowHeight + 'px' }, click: toggleSelected, css: {'selected': selected, 'even': isEven , 'odd': isOdd, 'ui-state-default': $parent.jqueryUITheme &amp;&amp; isOdd, 'ui-state-active':$parent.jqueryUITheme &amp;&amp; isEven}, kgRow: $data" class="kgRow odd" style="top: 616px; height: 28px;">
+                        <div data-bind="style: { cursor : canSelectRows ? 'pointer' : 'default' }, foreach: $grid.visibleColumns, css: { 'ui-widget-content': $grid.jqueryUITheme }" class="" style="cursor: pointer;">
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col0">
+                                <div class="kgSelectionCell">
+                                    <input class="kgSelectionCheckbox" type="checkbox" data-bind="checked: $parent.selected">
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col1">
+                                <div>
+                                    <span class="tick-icon" data-bind="css: { 'exclamation-icon': $parent.entity.dirtyFlag.isDirty}"></span>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col2">
+                                <div class="vert-outer fw row-height-standard">
+                                    <div class="vert-inner">
+                                        <a href="../Annotation/GetImageById?id=e07ece58-9994-e211-bd82-005056920143&amp;imagetype=memo" data-popup="true" class="cell-pad-left cell-attachment" data-bind="visible: $parent.entity.AttachmentURL() != null ,attr: {href: $parent.entity.AttachmentURL(), title: $parent.entity.FileName()}" title="CapLink_JLL.jpg">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col3">
+                                <div class="vert-outer">
+                                    <div class="vert-inner">
+                                        <a href="#" target="_blank" data-bind="text: $parent.entity.Subject(),attr:{title:$parent.entity.Subject()},click: $userViewModel.showMemoPopup.bind($data, $parent.entity.ID())" class="standard-link" title="test phone call">test phone call</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col4">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt4">03/25/2013</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col5">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt5">Bonetti, John~ Licudine, Ryan~ Rojo, Luke</div>
+                            </div>
+                            <div data-bind="attr: { 'class': cellClass() + ' kgCell col' + $index() }, kgCell: $data" class=" kgCell col6">
+                                <div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)" class="kgCellText colt6">Licudine, Ryan</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kgFooterPanel" data-bind="visible: footerVisible, css: {'ui-widget-content': jqueryUITheme, 'ui-corner-bottom': jqueryUITheme}, style: footerStyle" style="width: 896px; height: 55px;">
+            <div class="kgTotalSelectContainer" data-bind="visible: footerVisible">
+                <div class="kgFooterTotalItems" data-bind="css: {'kgNoMultiSelect': !multiSelect}">
+                    <span class="kgLabel">Total Items:
+                        <span data-bind="text: maxRowsDisplay">23</span>
+                    </span>
+                    <span data-bind="visible: filterText().length &gt; 0" class="kgLabel" style="display: none;">(Showing:
+                        <span data-bind="text: totalFilteredItemsLength">23</span>)</span>
+                </div>
+                <div class="kgFooterSelectedItems" data-bind="visible: multiSelect">
+                    <span class="kgLabel">Selected Items:
+                        <span data-bind="text: selectedItemCount">0</span>
+                    </span>
+                </div>
+            </div>
+            <div class="kgPagerContainer" style="float: right; margin-top: 10px;" data-bind="visible: (footerVisible &amp;&amp; enablePaging), css: {'kgNoMultiSelect': !multiSelect}">
+                <div style="float:left; margin-right: 10px;" class="kgRowCountPicker"></div>
+                <div style="float:left; margin-right: 10px; line-height:25px;" class="kgPagerControl">
+                    <button class="kgPagerButton" data-bind="click: pageToFirst, disable: cantPageBackward()" title="First Page" disabled="">
+                        <div class="kgPagerFirstTriangle">
+                            <div class="kgPagerFirstBar"></div>
+                        </div>
+                    </button>
+                    <button class="kgPagerButton" data-bind="click: pageBackward, disable: cantPageBackward()" title="Previous Page" disabled="">
+                        <div class="kgPagerFirstTriangle kgPagerPrevTriangle"></div>
+                    </button>
+                    <input class="kgPagerCurrent" type="number" style="width:50px; height: 24px; margin-top: 1px; padding: 0px 4px;" data-bind="value: pagingOptions.currentPage, valueUpdate: 'afterkeydown'">
+                    <button class="kgPagerButton" data-bind="click: pageForward, disable: cantPageForward()" title="Next Page" disabled="">
+                        <div class="kgPagerLastTriangle kgPagerNextTriangle"></div>
+                    </button>
+                    <button class="kgPagerButton" data-bind="click: pageToLast, disable: cantPageForward()" title="Last Page" disabled="">
+                        <div class="kgPagerLastTriangle">
+                            <div class="kgPagerLastBar"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

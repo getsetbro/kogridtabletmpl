@@ -1,0 +1,40 @@
+table {
+empty-cells: show;
+border-collapse: collapse;
+border-spacing: 0;
+table-layout: fixed;
+width:800px;
+}
+.gridStyle {
+    border: 1px solid #999;
+}
+
+.kgViewport{
+	height: 150px;
+}
+
+
+th{
+	text-align: left;
+}
+th .kgSelectionHeader {
+	position: static;
+	margin-top: 7px;
+	margin-left: 6px;
+}
+
+.kgHeaderCell, .kgRow, .kgCell {
+position: static;
+}
+.kgHeaderSortColumn{
+	position: relative;
+}
+
+
+.kgFooterPanel:after{
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	content: '';
+	display: block
+}

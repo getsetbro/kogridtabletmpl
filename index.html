@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>kogrid table tmpl</title>
+    <link rel="stylesheet" type="text/css" href="KoGrid.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <div class="gridStyle" data-bind="koGrid: {
+      data: myData,
+      enableColumnResize: true,
+      displaySelectionCheckbox: true,
+      multiSelect: true,
+      showColumnMenu: false,
+      showFilter: false,
+      showGroupPanel: false,
+      columnDefs: [ 
+        { field: 'a', displayName: '!', width: 22}, 
+        { field: 'b', headerClass: 'hdr-attachment', displayName: 'Attachment', width: 35}, 
+        { field: 'c', displayName: 'Subject'}, 
+        { field: 'd', displayName: 'Date' }, 
+        { field: 'e', displayName: 'Regarding' }, 
+        { field: 'f', displayName: 'Author' },
+        { field: 'g', displayName: 'gggggggggggggggggggggggg' },
+        { field: 'h', displayName: 'hhhh  h h h h h h h hh  hh ' },
+        { field: 'i', displayName: 'iii', cellTemplate: $('#m').html()  }
+      ]
+    }">
+    </div>
+    <script id="m"><div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)"></div></script>
+    <script src="jquery180.min.js"></script>
+    <script type="text/javascript" src="knockout3.min.js"></script>
+    <script type="text/javascript" src="KoGrid.debug1.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+</body>
+
+</html>
