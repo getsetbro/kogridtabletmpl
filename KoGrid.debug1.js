@@ -253,7 +253,7 @@
     /***********************************************
     * FILE: ..\src\templates\rowTemplate.html
     ***********************************************/
-    window.kg.defaultRowTemplate = function () { return '<tr class="kgRow" data-bind="click: toggleSelected,css: {\'selected\': selected, \'even\': isEven , \'odd\': isOdd }"><!-- ko foreach: $grid.visibleColumns --><td data-bind="kgCell: $data, attr: { \'class\': \'kgCell \' + \'col\' + $index() }"></td><!-- /ko --></tr>'; };
+    window.kg.defaultRowTemplate = function () { return '<tr class="kg-Row" data-bind="click: toggleSelected,css: {\'selected\': selected, \'even\': isEven , \'odd\': isOdd }"><!-- ko foreach: $grid.visibleColumns --><td data-bind="kgCell: $data, attr: { \'class\': \'kgCell \' + \'col\' + $index() }"></td><!-- /ko --></tr>'; };
 
     /***********************************************
     * FILE: ..\src\templates\cellTemplate.html

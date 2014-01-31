@@ -22,7 +22,18 @@ th .kgSelectionHeader {
 	margin-top: 7px;
 	margin-left: 6px;
 }
-
+.kg-Row {
+border-bottom: 1px solid rgb(229, 229, 229);
+}
+.kg-Row.odd {
+background-color: rgb(253, 253, 253);
+}
+.kg-Row.even {
+background-color: rgb(243, 243, 243);
+}
+.kg-Row.selected {
+background-color: rgb(189, 208, 203);
+}
 .kgHeaderCell, .kgRow, .kgCell {
 position: static;
 }

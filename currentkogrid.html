@@ -5,7 +5,9 @@
     <meta charset="utf-8" />
     <title>kogrid table tmpl</title>
     <link rel="stylesheet" type="text/css" href="KoGrid.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <style type="text/css">
+    .gridStyle{min-height: 222px}
+    </style>
 </head>
 
 <body>
@@ -31,10 +33,9 @@
     }">
     </div>
     <script id="m"><div data-bind="attr: { 'class': 'kgCellText colt' + $index()}, html: $data.getProperty($parent)"></div></script>
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+    <script src="jquery180.min.js"></script>
     <script type="text/javascript" src="knockout3.min.js"></script>
-    <script type="text/javascript" src="KoGrid.debug1.js"></script>
+    <script type="text/javascript" src="KoGrid-2.1.1.debug.js"></script>
     <script type="text/javascript" src="script.js"></script>
 
 </body>
