@@ -5,9 +5,6 @@ border-spacing: 0;
 table-layout: fixed;
 width:800px;
 }
-.gridStyle {
-    border: 1px solid #999;
-}
 
 .kgViewport{
 	height: 150px;
